@@ -184,7 +184,7 @@ class RDStation
 
 			if (ini_get('display_errors')) {
 
-				// echo $e->getMessage();
+				echo $e->getMessage();
 
 			}
 
