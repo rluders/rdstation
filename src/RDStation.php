@@ -164,7 +164,7 @@ class RDStation
 
 			$client = new GuzzleClient($this->getApiUrl());
 
-			$response = $client->post(
+			$request = $client->post(
 				'conversions',
 				array(
 					'config' => array(
@@ -184,7 +184,7 @@ class RDStation
 
 			if (ini_get('display_errors')) {
 
-				echo $e->getMessage();
+				// echo $e->getMessage();
 
 			}
 
