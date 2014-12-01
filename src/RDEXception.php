@@ -1,6 +1,6 @@
 <?php namespace Rluders\RDStation;
 
-use GuzzleHttp\Exception\RequestException;
+use namespace Guzzle\Http\Exception\RequestException;
 
 class RDException exnteds RequestException
 {
