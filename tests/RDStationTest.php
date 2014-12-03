@@ -2,7 +2,7 @@
 
 use Rluders\RDStation\RDStation;
 
-class RDStationText extends PHPUnit_Framework_TestCase
+class RDStationTest extends PHPUnit_Framework_TestCase
 {
 	
 
