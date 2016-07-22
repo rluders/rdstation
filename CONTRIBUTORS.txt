@@ -1,0 +1,5 @@
+This file contains a list of people who have made large contributions
+to the public version of RDStation Library.
+
+Ricardo Lüders <ricardo(at)luders.com.br>
+Isaque Alves <isaque.vsalves(at)gmail.com>
