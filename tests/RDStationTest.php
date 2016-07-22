@@ -1,51 +1,63 @@
 <?php
 
-use Rluders\RDStation\RDStation;
+use RDStation\RDStation;
 
-class RDStationText extends PHPUnit_Framework_TestCase
+class RDStationTest extends PHPUnit_Framework_TestCase
 {
-	
+    public function testClassExists()
+    {
+        $rdstation = new RDStation();
+        $this->assertInstanceOf('RDStation\RDStation', $rdstation);
+    }
 
-	public function testClassExists()
-	{
+    public function testSetAndGetters()
+    {
+        $rdstation = new RDStation();
 
-		$rdstation = new RDStation();
-		$this->assertInstanceOf('Rluders\RDStation\RDStation', $rdstation);
+        $rdstation->setToken('newtoken');
+        $this->assertEquals('newtoken', $rdstation->getToken());
 
-	}
+        $rdstation->setPrivateToken('newprivatetoken');
+        $this->assertEquals('newprivatetoken', $rdstation->getPrivateToken());
 
-	public function testSetAndGetters()
-	{
+        $rdstation->setIdentifier('newid');
+        $this->assertEquals('newid', $rdstation->getIdentifier());
+    }
 
-		$rdstation = new RDStation();
+    public function testCreateNewLead()
+    {
+        $token = 'invalid-token';
 
-		$rdstation->setToken('newtoken');
-		$this->assertEquals('newtoken', $rdstation->getToken());
+        $rdstation = new RDStation($token, 'phpunit-test');
+        $result = $rdstation->send(
+            [
+                'name' => 'Test User',
+                'email' => 'valid@email.com',
+            ], 'conversions'
+        );
 
-		$rdstation->setApiUrl('newurl');
-		$this->assertEquals('newurl', $rdstation->getApiUrl());
+        //$this->assertEquals(200, $result->getStatusCode()); // only if a valid token is provided.
+        $this->assertContains('Failed to send request', $result->getContents());
+    }
 
-		$rdstation->setIdentifier('newid');
-		$this->assertEquals('newid', $rdstation->getIdentifier());
+    public function testUpdateLead()
+    {
+        $token = 'invalid-token';
+        $privateToken = 'invalid-private-token';
 
-	}
-
-	public function testSend()
-	{
-
-		$token = 'invalid-token';
-
-		$rdstation = new RDStation($token, 'phpunit-test');
-		$result = $rdstation->send(
-			array(
-				'name' => 'Ricardo Lüders',
-				'email' => 'valid@email.com'
-			)
-		);
-
-		// $this->assertTrue($result);
-		$this->assertFalse($result);
-
-	}
-
+        $rdstation = new RDStation($token, 'phpunit-test');
+        $result = $rdstation->send(
+            [
+                'auth_token' => $privateToken,
+                'email' => 'valid@email.com',
+                'tags' => 'test',
+                'lead' => [
+                    'lifecycle_stage' => 1,
+                    'opportunity' => true,
+                ],
+            ], 'leads'
+        );
+        //$this->assertEquals(200, $result->getStatusCode()); // only if a valid token is provided.
+        $this->assertContains('Failed to send request', $result->getContents());
+    }
 }

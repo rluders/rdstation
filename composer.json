@@ -2,13 +2,12 @@
     "name": "rluders/rdstation",
     "description": "RDStation Integration",
     "require": {
-        "php": ">=5.3",
-        "wixel/gump": "dev-master",
-        "guzzle/guzzle": "3.9.*@dev"
+        "php": ">=5.3.3",
+        "guzzlehttp/guzzle": "~5.0"
     },
     "autoload": {
         "psr-4": {
-            "Rluders\\RDStation\\": "src"
+            "RDStation\\": "src"
         }
     },
     "require-dev": {
@@ -19,6 +18,10 @@
         {
             "name": "Ricardo Lüders",
             "email": "ricardo.luders@humantech.com.br"
+        },
+        {
+            "name": "Isaque Alves",
+            "email": "isaquealves@gmail.com"
         }
     ],
     "minimum-stability": "dev"
